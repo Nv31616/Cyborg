@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARCUS - Seamless Payments</title>
+    <title>ARCUS - Spending Insights</title>
+    <!-- Chart.js for visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <style>
         /* General Styles */
         :root {
@@ -22,51 +24,124 @@
         .logo { font-size: 1.8rem; font-weight: bold; color: var(--primary-color); }
         nav a { text-decoration: none; color: var(--text-color); margin-left: 20px; padding: 5px 0; transition: color 0.3s, border-bottom 0.3s; }
         nav a:hover, nav a.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
-
-        /* Payments Layout */
-        main { padding: 30px; max-width: 800px; margin: 0 auto; }
-        .card { background-color: var(--card-background); padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
-        .card h2 { margin-bottom: 10px; font-size: 1.6rem; color: var(--text-color); }
-        .subtitle { font-size: 0.9rem; color: var(--subtitle-color); margin-bottom: 20px; }
         
-        /* Payment Form */
-        .payment-form { padding: 15px 0; margin-bottom: 20px; }
-        .input-full { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; }
-        .note { font-size: 0.9rem; color: var(--secondary-color); margin-bottom: 15px; }
+        /* Main Grid Layout */
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; padding: 30px; max-width: 1200px; margin: 0 auto; }
+        .summary-card { grid-area: 1 / 1 / 2 / 2; }
+        .spending-analysis { grid-area: 1 / 2 / 2 / 3; }
+        .goal-tracker { grid-area: 2 / 1 / 3 / 2; }
+        .budget-recommendations { grid-area: 2 / 2 / 3 / 3; }
+        .ai-literacy-teaser { grid-area: 3 / 1 / 4 / 3; }
+
+        /* Card and Text Styles */
+        .card { background-color: var(--card-background); padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .card h2 { margin-bottom: 10px; font-size: 1.4rem; color: var(--text-color); }
+        .subtitle { font-size: 0.9rem; color: var(--subtitle-color); margin-bottom: 15px; }
+        .balance-amount { font-size: 2.8rem; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; }
+        .balance-amount small { font-size: 1.5rem; }
         
         /* Buttons */
-        .primary-btn { width: 100%; padding: 12px; font-size: 1.1rem; background-color: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; margin-top: 10px; }
+        .primary-btn, .tertiary-btn { padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; margin-top: 10px; }
+        .primary-btn { background-color: var(--primary-color); color: white; }
         .primary-btn:hover { background-color: #0056b3; }
+        .tertiary-btn { background-color: #ffc107; color: var(--text-color); }
+        .tertiary-btn:hover { background-color: #e0aa00; }
+
+        /* Goal Tracker */
+        .goal-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .goal-item h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--secondary-color); }
+        .progress-bar { background-color: #e9ecef; border-radius: 50px; height: 15px; margin-bottom: 5px; overflow: hidden; }
+        .progress { height: 100%; background-color: var(--secondary-color); border-radius: 50px; width: 45%; } 
+
+        /* Recommendations */
+        .recommendation-list { display: flex; flex-direction: column; gap: 15px; }
+        .recommendation-item { padding: 10px; border-left: 4px solid var(--primary-color); background-color: #f8faff; border-radius: 4px; }
+        .reco-amount { font-weight: bold; color: #d9534f; }
+        .chart-container { height: 300px; width: 100%; }
     </style>
 </head>
 <body>
     <header>
         <div class="logo">ARCUS</div>
         <nav>
-            <a href="insights.html">Spending Insights</a>
-            <a href="payments.html" class="active">Payments</a>
-            <a href="login.html">Log Out</a>
+            <a href="insights.html" class="active">Spending Insights</a>
+            <a href="payments.html">Payments</a>
+            <a href="index.html">Log Out</a>
         </nav>
     </header>
 
-    <main>
-        <section class="card">
-            <h2>⚡ Seamless Payments</h2>
-            <p class="subtitle">Fast, low-cost payments, prioritizing high accessibility for all users.</p>
+    <main class="dashboard-grid">
+        <section class="card summary-card">
+            <h2>Current Balance</h2>
+            <p class="balance-amount">₹1,20,500.<small>88</small></p>
+            <p class="subtitle">Last Login: Nov 1, 2025</p>
+            <a href="payments.html" class="primary-btn">Quick Pay</a>
+        </section>
 
-            <div class="payment-form">
-                <input type="text" placeholder="Recipient Name or Digital ID" class="input-full">
-                <input type="number" placeholder="Amount in Rupees (₹)" class="input-full">
-                
-                <select class="input-full">
-                    <option>Simple Transfer</option>
-                    <option>Programmable Financial Remittance (PFR)</option>
-                </select>
-                
-                <p class="note">✅ Status: Verified connectivity. Transaction will settle instantly.</p>
-                <button class="primary-btn">Send Funds Instantly</button>
+        <section class="card spending-analysis">
+            <h2>Spending Analysis (Last 30 Days)</h2>
+            <p class="subtitle">Insight: Your Groceries spending is **15% above** your peer group average.</p>
+            <div class="chart-container">
+                <canvas id="spendingChart"></canvas>
             </div>
         </section>
+
+        <section class="card goal-tracker">
+            <h2>Savings Goals</h2>
+            <div class="goal-item">
+                <h3>🏠 Home Down Payment Fund</h3>
+                <div class="progress-bar"><div class="progress"></div></div>
+                <p><strong>₹45,000 / ₹1,00,000 Saved</strong> (45%)</p>
+                <p class="subtitle">Goal Insight: Small, consistent transfers (BCB Proxy) have boosted your commitment score.</p>
+            </div>
+        </section>
+
+        <section class="card budget-recommendations">
+            <h2>AI-Driven Budget Recommendations (CFP)</h2>
+            <p class="subtitle">Based on your BCB Proxies and recent income.</p>
+            <div class="recommendation-list">
+                <div class="recommendation-item">
+                    <p>🛒 Groceries Cap: <span class="reco-amount">₹3,500 / Month</span></p>
+                    <small>Recommendation: Try three local vendors this week to reduce cost by an estimated 8%.</small>
+                </div>
+                <div class="recommendation-item">
+                    <p>💡 Subscription Review: <span class="reco-amount">Check Now</span></p>
+                    <small>Recommendation: Flagged 'StreamFlix' as unused for 60 days. Cancel to save ₹500/month.</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="card ai-literacy-teaser">
+            <h2>Financial Literacy Challenge: Debt Interest</h2>
+            <p>Earn a **+0.1% savings boost** by completing a 3-minute challenge.</p>
+            <button class="tertiary-btn">Start Challenge</button>
+        </section>
     </main>
+
+    <script>
+        // Chart Initialization Script 
+        document.addEventListener('DOMContentLoaded', function() {
+            const spendingCtx = document.getElementById('spendingChart').getContext('2d');
+            
+            const spendingData = {
+                labels: ['Groceries', 'Rent/Housing', 'Bills & Utilities', 'Transportation', 'Dining Out', 'Savings/Investments'],
+                datasets: [{
+                    data: [350, 800, 150, 100, 120, 450],
+                    backgroundColor: ['#dc3545', '#007bff', '#ffc107', '#20c997', '#6f42c1', '#28a745'],
+                    hoverOffset: 4
+                }]
+            };
+
+            new Chart(spendingCtx, {
+                type: 'doughnut',
+                data: spendingData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'right' } }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
