@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCUS - Seamless Payments</title>
+    <style>
+        /* General Styles */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #28a745;
+            --background-color: #f4f7f9;
+            --card-background: #ffffff;
+            --text-color: #333;
+            --subtitle-color: #6c757d;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background-color: var(--background-color); color: var(--text-color); line-height: 1.6; }
+        
+        /* Header and Navigation */
+        header { background-color: var(--card-background); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); }
+        .logo { font-size: 1.8rem; font-weight: bold; color: var(--primary-color); }
+        nav a { text-decoration: none; color: var(--text-color); margin-left: 20px; padding: 5px 0; transition: color 0.3s, border-bottom 0.3s; }
+        nav a:hover, nav a.active { color: var(--primary-color); border-bottom: 2px solid var(--primary-color); }
+
+        /* Payments Layout */
+        main { padding: 30px; max-width: 800px; margin: 0 auto; }
+        .card { background-color: var(--card-background); padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
+        .card h2 { margin-bottom: 10px; font-size: 1.6rem; color: var(--text-color); }
+        .subtitle { font-size: 0.9rem; color: var(--subtitle-color); margin-bottom: 20px; }
+        
+        /* Payment Form */
+        .payment-form { padding: 15px 0; margin-bottom: 20px; }
+        .input-full { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem; }
+        .note { font-size: 0.9rem; color: var(--secondary-color); margin-bottom: 15px; }
+        
+        /* Buttons */
+        .primary-btn { width: 100%; padding: 12px; font-size: 1.1rem; background-color: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: background-color 0.3s; margin-top: 10px; }
+        .primary-btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">ARCUS</div>
+        <nav>
+            <a href="insights.html">Spending Insights</a>
+            <a href="payments.html" class="active">Payments</a>
+            <a href="login.html">Log Out</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>⚡ Seamless Payments</h2>
+            <p class="subtitle">Fast, low-cost payments, prioritizing high accessibility for all users.</p>
+
+            <div class="payment-form">
+                <input type="text" placeholder="Recipient Name or Digital ID" class="input-full">
+                <input type="number" placeholder="Amount in Rupees (₹)" class="input-full">
+                
+                <select class="input-full">
+                    <option>Simple Transfer</option>
+                    <option>Programmable Financial Remittance (PFR)</option>
+                </select>
+                
+                <p class="note">✅ Status: Verified connectivity. Transaction will settle instantly.</p>
+                <button class="primary-btn">Send Funds Instantly</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

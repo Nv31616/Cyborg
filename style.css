@@ -1,1 +1,193 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #28a745;
+    --background-color: #f4f7f9;
+    --card-background: #ffffff;
+    --text-color: #333;
+    --subtitle-color: #6c757d;
+}
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- SPA Page Management --- */
+.page {
+    display: none;
+    min-height: 100vh;
+}
+.page.active {
+    display: block;
+}
+.content-view {
+    display: none;
+    grid-column: 1 / -1; /* Reset grid on content change */
+    display: contents; /* Allows children to participate in parent grid */
+}
+.content-view.active {
+    display: contents; 
+}
+
+
+/* --- 1. Login Page Styling --- */
+#login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+}
+
+.login-card {
+    background-color: var(--card-background);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+.login-card h2 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+.login-card input, .login-card button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+.login-card .primary-btn {
+    margin-top: 10px;
+}
+
+
+/* --- 2. Main App Structure --- */
+header {
+    background-color: var(--card-background);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    margin-left: 20px;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+nav a:hover, nav a.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+
+/* --- Dashboard Grid Layout (For Insights) --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* General Card Styling */
+.card {
+    background-color: var(--card-background);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.full-width {
+    grid-column: 1 / -1; 
+}
+/* Remaining Card styles (from previous response) */
+.card h2 { margin-bottom: 10px; font-size: 1.4rem; color: var(--text-color); }
+.subtitle { font-size: 0.9rem; color: var(--subtitle-color); margin-bottom: 15px; }
+.balance-amount { font-size: 2.8rem; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; }
+.balance-amount small { font-size: 1.5rem; }
+
+/* Buttons & Inputs */
+.primary-btn, .secondary-btn, .tertiary-btn {
+    padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer;
+    font-weight: 600; transition: background-color 0.3s; margin-top: 10px;
+}
+.primary-btn { background-color: var(--primary-color); color: white; }
+.primary-btn:hover { background-color: #0056b3; }
+.secondary-btn { background-color: var(--secondary-color); color: white; }
+.secondary-btn:hover { background-color: #1e7e34; }
+.tertiary-btn { background-color: #ffc107; color: var(--text-color); }
+.tertiary-btn:hover { background-color: #e0a800; }
+.input-full {
+    width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+/* Goal Tracker */
+.goal-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+.goal-item h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--secondary-color); }
+.progress-bar { background-color: #e9ecef; border-radius: 50px; height: 15px; margin-bottom: 5px; overflow: hidden; }
+.progress { height: 100%; background-color: var(--secondary-color); border-radius: 50px; transition: width 0.6s ease; }
+
+/* Recommendations */
+.recommendation-list { display: flex; flex-direction: column; gap: 15px; }
+.recommendation-item { padding: 10px; border-left: 4px solid var(--primary-color); background-color: #f8faff; border-radius: 4px; }
+.reco-amount { font-weight: bold; color: #d9534f; }
+
+/* Chart Container */
+.chart-container { height: 300px; width: 100%; }
+
+
+/* --- Payments View Specifics --- */
+.payment-form {
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+.note {
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+.pay-btn {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 12px;
+}
+.transaction-list {
+    list-style: none;
+    padding: 0;
+}
+.transaction-list li {
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+.transaction-list li:last-child {
+    border-bottom: none;
+}
+.transaction-list .pending {
+    color: orange;
+    font-style: italic;
+}
