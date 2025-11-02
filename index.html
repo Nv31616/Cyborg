@@ -5,62 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ARCUS - Login</title>
     <style>
-        /* General Styles */
         :root {
             --primary-color: #007bff;
             --background-color: #f4f7f9;
             --card-background: #ffffff;
             --text-color: #333;
-            --subtitle-color: #6c757d;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
         body { background-color: var(--background-color); color: var(--text-color); line-height: 1.6; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
-        /* Login Card Styling */
-        .login-card {
-            background-color: var(--card-background);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
+        .login-card { 
+            background-color: var(--card-background); 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+            width: 100%; 
+            max-width: 380px;
             text-align: center;
         }
-        .logo { font-size: 2.5rem; font-weight: bold; color: var(--primary-color); margin-bottom: 5px; }
-        .login-card h2 { margin-bottom: 25px; font-size: 1.5rem; }
+        .logo { font-size: 2.5rem; font-weight: 800; color: var(--primary-color); margin-bottom: 5px; }
+        h2 { font-size: 1.5rem; font-weight: 600; color: var(--text-color); margin-bottom: 25px; }
         
-        /* Form Elements */
-        .login-card input, .login-card button {
+        .input-group { margin-bottom: 20px; }
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 12px;
-            margin-bottom: 15px;
             border-radius: 8px;
             border: 1px solid #ccc;
             font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .primary-btn {
-            background-color: var(--primary-color);
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-            border: none;
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+            outline: none;
         }
-        .primary-btn:hover { background-color: #0056b3; }
-        .subtitle { font-size: 0.9rem; color: var(--subtitle-color); margin-top: 15px; }
+        
+        .login-btn { 
+            width: 100%; 
+            padding: 12px; 
+            font-size: 1.1rem; 
+            background-color: var(--primary-color); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: 600; 
+            transition: background-color 0.3s, transform 0.1s; 
+        }
+        .login-btn:hover { background-color: #0056b3; transform: translateY(-1px); }
+        
+        .footer-note { font-size: 0.85rem; color: #6c757d; margin-top: 20px; }
+
+        /* Mock Login Message */
+        .mock-message {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #ffe0b2; /* Light Orange */
+            border: 1px solid #ffb74d;
+            color: #e65100; /* Dark Orange */
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
     <div class="login-card">
-        <h1 class="logo">ARCUS</h1>
-        <h2>Login</h2>
-        <form action="insights.html" method="GET">
-            <input type="text" placeholder="Username / Digital ID" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit" class="primary-btn">Log In</button>
+        <div class="logo">ARCUS</div>
+        <h2>Sign In</h2>
+        
+        <!-- Mock login: Redirects to insights.html -->
+        <form action="insights.html" method="get">
+            <div class="input-group">
+                <input type="text" placeholder="User ID" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="login-btn">Log In</button>
         </form>
-        <p class="subtitle">Enabling accessibility and trust among underserved users.</p>
+
+        <div class="mock-message">
+            Note: This is a static demo. Clicking 'Log In' will redirect to the Insights page.
+        </div>
+        
+        <p class="footer-note">Enabling accessibility and trust among underserved users.</p>
     </div>
 </body>
 </html>
